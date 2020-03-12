@@ -11,7 +11,7 @@ namespace Dunglas\AngularCsrfBundle\EventListener;
 
 use Dunglas\AngularCsrfBundle\Csrf\AngularCsrfTokenManager;
 use Dunglas\AngularCsrfBundle\Routing\RouteMatcherInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -67,11 +67,11 @@ class AngularCsrfValidationListener
     /**
      * Handles CSRF token validation.
      *
-     * @param GetResponseEvent $event
+     * @param RequestEvent $event
      *
      * @throws AccessDeniedHttpException
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         if (
             HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()
